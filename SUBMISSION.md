@@ -81,7 +81,7 @@ The following is a list of vehicle features that appear - in the point-cloud - a
 
 ## ID_S4_EX2 - Compute False-Negatives and False-Positives
 * See code in objdet_eval.py lines 103 - 122.
-* Add breakpoin in objdet_eval.py line 127.
+* Add breakpoint in objdet_eval.py line 127.
 * Run code and inspect "det_performance" or open image "det_performance.png".
 * ![](det_performance.png)
 * NOTE: Unlike the picture included in the project instructions, my code identified 3 true positives and 0 false negatives.
