@@ -57,7 +57,7 @@ class Association:
                 meas = meas_list[j]
                 dist = self.MHD(track, meas, meas.sensor.name)
                 # only replace infinity value with MHD if gating criteria are met
-                if self.gating(dist, meas.sensor.name):
+                if self.gating(dist, meas.sensor):
                     self.association_matrix[i,j] = dist
                              
         ############
@@ -111,7 +111,8 @@ class Association:
         
         # See lesson 7.20.
 
-        limit = params.gating_threshold
+        limit = chi2.ppf(params.gating_threshold, df = sensor.dim_meas)
+        
         if MHD < limit:
             return True
         else:

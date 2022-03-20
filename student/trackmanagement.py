@@ -129,11 +129,11 @@ class Trackmanagement:
             track = self.track_list[i]
             if track.state == 'confirmed' and track.score < params.delete_threshold:
                 self.delete_track(track)
-            if track.state != 'confirmed' and track.P[0, 0] >= params.max_P:
+            elif track.state != 'confirmed' and track.P[0, 0] >= params.max_P:
                 self.delete_track(track)
-            if track.state != 'confirmed' and track.P[1, 1] >= params.max_P:
+            elif track.state != 'confirmed' and track.P[1, 1] >= params.max_P:
                 self.delete_track(track)
-            if track.state != 'confirmed' and track.score < 0.1:
+            elif track.state != 'confirmed' and track.score < 0.1:
                 self.delete_track(track)
 
         ############
