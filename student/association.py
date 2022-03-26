@@ -55,11 +55,14 @@ class Association:
             track = track_list[i]
             for j in range(M):
                 meas = meas_list[j]
-                dist = self.MHD(track, meas, meas.sensor.name)
+                dist = self.MHD(track, meas, KF)
                 # only replace infinity value with MHD if gating criteria are met
                 if self.gating(dist, meas.sensor):
                     self.association_matrix[i,j] = dist
-                             
+                else:
+                    print('Measurement by {} did not meet gating threshold'.format(meas.sensor.name))
+
+
         ############
         # END student code
         ############ 
@@ -131,10 +134,10 @@ class Association:
 
         # calculate Mahalanobis distance
         H = meas.sensor.get_H(track.x)
-        gamma = meas.z - H * track.x
+        gamma = KF.gamma(track, meas)
         S = H * track.P * np.transpose(H) + meas.R
         MHD = np.transpose(gamma) * np.linalg.inv(S) * gamma # Mahalanobis distance formula
-        
+
         return MHD
         
         ############
